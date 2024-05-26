@@ -60,6 +60,7 @@ async function displayCategories() {
     const button = document.createElement("button");
     button.textContent = category.name;
     button.id = category.id;  // Set the button id
+    button.classList.add('filter-button');  // Add the 'filter-button' class to the button
     button.addEventListener('click', () => filterWorksByCategory(category.name));  // Add a click event listener
     filters.appendChild(button);  // Add the button to the filters
   });
