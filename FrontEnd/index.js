@@ -8,20 +8,6 @@ async function getWorks() {
   return await response.json();
 }
 
-
-
-/* Create buttons filters in the DOM */
-/*async function displayCategories() {
-  const arrayCategories = await getWorks()
-  arrayCategories.forEach(work => {
-    const button = document.createElement("button")
-    button.textContent = work.category.name;
-    filters.appendChild(button);
-  });
-}
-
-displayCategories();*/
-
 /* Function to add works to the gallery */
 function addWorksToGallery(works) {
   gallery.innerHTML = '';  // Clear the gallery
