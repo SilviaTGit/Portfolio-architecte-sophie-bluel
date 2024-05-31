@@ -311,7 +311,7 @@ footer nav ul {
     border-style: solid;
 }
 
-button[id="0"] {
+button:focus {
     background-color: #1d6154;
     color: white;
 }
