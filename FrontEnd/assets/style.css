@@ -322,3 +322,13 @@ h1 a {
     text-decoration: none;
     color: inherit;
 }
+
+/*** Error message style for login.js page ***/
+.errorMessage {
+    color: red;
+    font-weight: bold;
+}
+
+#login input:invalid {
+    border: 1px solid red;
+}

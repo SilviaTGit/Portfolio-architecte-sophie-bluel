@@ -42,5 +42,6 @@ async function authentification() {
 
         /* Display an error message to the user */
         errorMessage.textContent = "Erreur dans l'identifiant ou le mot de passe.";
+        errorMessage.classList.add("errorMessage"); // Add the error message class
     }
 }
