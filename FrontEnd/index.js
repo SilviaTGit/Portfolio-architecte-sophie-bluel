@@ -68,3 +68,48 @@ async function displayCategories() {
 
 displayCategories();  // Call the function to display the filter buttons
 displayWorks();  // Call the function to initially display all works
+
+
+/* Home EDIT MODE */
+document.addEventListener("DOMContentLoaded", () => {
+  const token = localStorage.getItem("token");
+  const loginLink = document.getElementById("loginLink");
+  const logoutLink = document.getElementById("logoutLink");
+
+  if (token) {
+      // User is logged in
+      loginLink.classList.add("hidden"); // Hide login link
+      logoutLink.classList.remove("hidden"); // Show logout link
+      filters.classList.add("hidden"); // Hide filters div
+      displayEditMode();
+  } else {
+      // User is not logged in
+      loginLink.classList.remove("hidden");
+      logoutLink.classList.add("hidden");
+  }
+
+  /* Logout functionality */
+  logoutLink.addEventListener("click", () => {
+      localStorage.removeItem("token"); // Remove the token from localStorage
+      window.location.href = "index.html"; // Reload the page or redirect to index
+  });
+});
+
+/* Display Edit mode functionality */
+function displayEditMode() {
+ const editModeBanner = document.createElement("section");
+
+  editModeBanner.classList.add("editModeBanner");
+  document.body.insertBefore(editModeBanner, document.body.firstChild);
+  let icon = document.createElement("i"); // Create the icon
+  icon.classList.add("fa-regular", "fa-pen-to-square");
+  let text = document.createTextNode("Mode Edition"); // Create the text
+
+  editModeBanner.appendChild(icon);
+  editModeBanner.appendChild(text);
+
+const projectsSection = document.querySelector("#portfolio h2");
+
+  /* Add icon and text directly after "Mes Projets" */
+  projectsSection.innerHTML += ' <span class="editProjects"><i class="fa-regular fa-pen-to-square"></i> modifier</span>';
+};

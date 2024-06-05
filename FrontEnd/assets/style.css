@@ -332,3 +332,27 @@ h1 a {
 #login input:invalid {
     border: 1px solid red;
 }
+
+/*** Style for hidden buttons and sections in EDIT MODE ***/
+.hidden {
+    display: none;
+}
+
+.editModeBanner {
+    background-color: #000000;
+    color: #ffffff;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0;
+}
+
+.editModeBanner i,
+.editProjects i {
+    margin-right: 8px; /* Space between text and icon*/
+}
+
+.editProjects {
+    font-size: 0.5em;
+    color: #000000;
+    margin-left: 20px;
+}
