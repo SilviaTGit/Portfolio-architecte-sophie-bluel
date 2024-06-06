@@ -111,5 +111,5 @@ function displayEditMode() {
 const projectsSection = document.querySelector("#portfolio h2");
 
   /* Add icon and text directly after "Mes Projets" */
-  projectsSection.innerHTML += ' <span class="editProjects"><i class="fa-regular fa-pen-to-square"></i> modifier</span>';
+  projectsSection.innerHTML += ' <span class="openModal1"><i class="fa-regular fa-pen-to-square"></i> modifier</span>';
 };

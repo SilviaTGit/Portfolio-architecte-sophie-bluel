@@ -1,0 +1,48 @@
+.modal {
+    display: flex;
+    justify-content: center;
+    position: absolute;
+    background-color: white;
+    border-radius: 1em;
+    width: 40%;
+    height: 40em;
+}
+
+.modalWrapper {
+    width: 100%;
+}
+
+#modalTitle {
+    color: black;
+    font-weight: 400;
+}
+
+.xClose {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 1em;
+}
+
+.modalButtons {
+    display: flex;
+    flex-wrap: wrap;
+    border-bottom: 1px solid black;
+    width: 70%;
+    margin: 0em 0em 2em 7em;
+}
+
+.addModalBtn {
+    font-family: "Syne";
+    color: white;
+    background-color: #1d6154;
+    border: 1px solid #1d6154;
+    width: 180px;
+    border-radius: 60px;
+    padding: 0.5em 0.3em 0.5em 0.3em;
+    margin-bottom: 1em;
+    cursor: pointer;
+}
+
+.deleteModalBtn {
+    color: #b1663c;
+}
