@@ -11,6 +11,7 @@ const openModal = function(e) {
     modal = target;
     const close = document.querySelector(".xClose");
     close.addEventListener("click", closeModal);
+    modal.querySelector(".deleteModalBtn").addEventListener("click", closeModal);
 };
 
 const closeModal = function(e) {
@@ -26,6 +27,6 @@ const closeModal = function(e) {
     modal = null;
 };
 
-document.querySelectorAll(".openModal1").forEach(span => {
-    span.addEventListener("click", openModal)
+document.querySelectorAll(".openModal1").forEach(a => {
+    a.addEventListener("click", openModal)
 })
