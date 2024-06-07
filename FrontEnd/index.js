@@ -75,6 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const token = localStorage.getItem("token");
   const loginLink = document.getElementById("loginLink");
   const logoutLink = document.getElementById("logoutLink");
+  const openModal1 = document.querySelector(".openModal1");
 
   if (token) {
       // User is logged in
@@ -86,6 +87,7 @@ document.addEventListener("DOMContentLoaded", () => {
       // User is not logged in
       loginLink.classList.remove("hidden");
       logoutLink.classList.add("hidden");
+      openModal1.classList.add("hidden");
   }
 
   /* Logout functionality */
