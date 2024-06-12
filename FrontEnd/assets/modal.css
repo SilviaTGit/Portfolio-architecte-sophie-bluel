@@ -15,6 +15,7 @@
     background-color: white;
     border-radius: 1em;
     padding: 2em;
+    box-sizing: border-box;
 }
 
 #modalTitle {
@@ -36,12 +37,38 @@
     align-items: center;
 }
 
-.photoGallery {
-    display: flex;
-    flex-wrap: wrap;
-    border-bottom: 1px solid black;
-    width: 70%;
-    margin: 0em 0em 2em 7em;
+.modalGallery {
+    box-sizing: border-box;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+    padding-bottom: 5em;
+    margin: 3em;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-column-gap: 10px;
+    grid-row-gap: 20px;
+}
+
+.modalGallery figure {
+    position: relative;
+    z-index: 0;
+}
+
+.modalGallery img {
+    width: 100%;
+}
+
+.modalGallery span {
+    position: absolute;
+    z-index: 1;
+    top: 10px;
+    right: 10px;
+    background-color: black;
+    padding: 0.4em;
+    border-radius: 4px;
+}
+
+.modalGallery i {
+    color: #ffffff;
 }
 
 .addModalBtn {
@@ -54,8 +81,4 @@
     padding: 0.5em 0.3em 0.5em 0.3em;
     margin-bottom: 1em;
     cursor: pointer;
-}
-
-.deleteModalBtn {
-    color: #b1663c;
 }

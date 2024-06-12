@@ -324,8 +324,7 @@ button:focus {
 }
 
 /*** Disactivated links style ***/
-nav a,
-h1 a {
+a {
     text-decoration: none;
     color: inherit;
 }
