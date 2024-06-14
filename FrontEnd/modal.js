@@ -2,6 +2,7 @@
 
 let modal = null;
 
+/* Function that open the Modal page */
 const openModal = function(e) {
     e.preventDefault();
     const target = document.querySelector(e.target.getAttribute("href"));
@@ -9,10 +10,14 @@ const openModal = function(e) {
     target.removeAttribute("aria-hidden");
     target.setAttribute("aria-modal","true");
     modal = target;
-    const close = document.querySelector(".xClose");
-    close.addEventListener("click", closeModal);
-};
+    modal.addEventListener("click", closeModal);
+    modal.querySelector(".xClose").addEventListener("click", closeModal);
+    /*const close = document.querySelector(".xClose");
+    close.addEventListener("click", closeModal);*/
+    modal.querySelector(".modalStop").addEventListener("click", stopPropagation);
 
+};
+/* Function that close the Modal page */
 const closeModal = function(e) {
     if (modal === null) return
     e.preventDefault();
@@ -22,8 +27,16 @@ const closeModal = function(e) {
     modal.setAttribute("aria-hidden", "true");
     modal.removeAttribute("aria-modal");
     modal.removeEventListener("click", closeModal);
+    modal.querySelector(".xClose").removeEventListener("click", closeModal)
+    modal.querySelector(".modalStop").removeEventListener("click", stopPropagation)
     modal = null;
 };
+
+/* Function that allows you to close the modal page only by clicking on X or off the page */
+
+const stopPropagation = function (e) {
+    e.stopPropagation()
+    }
 
 document.querySelectorAll(".openModal1").forEach(a => {
     a.addEventListener("click", openModal)
@@ -32,7 +45,7 @@ document.querySelectorAll(".openModal1").forEach(a => {
 
 /* Function to add works to the Modal gallery */
 
-import { getWorks } from "./index.js";
+import { getWorks } from "./index.js"; //Import getWorks function
 async function displayModalGallery () {
     const modalGallery = document.querySelector(".modalGallery");
     modalGallery.innerHTML= ""; // Clear the Modal gallery
@@ -52,6 +65,51 @@ async function displayModalGallery () {
         figure.appendChild(img);
         modalGallery.appendChild(figure);
       });
+      deleteWorks();
 }
 
 displayModalGallery();
+
+
+/* Function to delete works from the Modal gallery */
+
+function deleteWorks() {
+    // Select all elements with the class 'fa-trash-can' (trash icons)
+    const trashAll = document.querySelectorAll(".fa-trash-can");
+
+    // Iterate over each trash icon and add a click event listener
+    trashAll.forEach(trash => {
+        trash.addEventListener("click", async (e) => {
+            // Get the ID of the work to delete from the trash icon's ID
+            const id = trash.id;
+            // Retrieve the token from localStorage
+            const token = localStorage.getItem("token"); 
+
+            // Set up the request options, including the DELETE method and headers
+            const init = {
+                method: "DELETE",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${token}` // Add the authentication token
+                },
+            };
+
+            try {
+                // Send the DELETE request to the server
+                const response = await fetch(`http://localhost:5678/api/works/${id}`, init);
+                // Check if the response is not okay (status not in the range 200-299)
+                if (!response.ok) {
+                    console.log("Delete error!");
+                    return;
+                }
+
+                // Parse the response data as JSON
+                const data = await response.json();
+                console.log("Delete worked, here the data:", data);
+                displayModalGallery(); // Refresh the Modal gallery to reflect the deletion
+            } catch (error) {
+                console.error("Error deleting work:", error); // Log any errors that occur during the fetch request
+            }
+        });
+    });
+}
