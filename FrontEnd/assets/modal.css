@@ -18,7 +18,7 @@
     box-sizing: border-box;
 }
 
-#modalTitle {
+.modalTitle {
     margin: 1em 0em 1em 0em;
     text-align: center;
     color: black;
@@ -29,6 +29,10 @@
     display: flex;
     justify-content: flex-end;
     margin: 1em;
+}
+
+#modalUpload .xClose {
+    justify-content: space-between;
 }
 
 .modalButtons {

@@ -68,13 +68,38 @@
         <!---- Modal page -->
         <aside id="modal1" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modalTitle" style="display: none">
             <div class="modalWrapper modalStop">
-                <div class="xClose">
-                    <a href="#"><i class="fa-solid fa-xmark icone"></i></a>
+                <div class="modal1">
+                    <div class="xClose">
+                        <a href="#"><i class="fa-solid fa-xmark icone"></i></a>
+                    </div>
+                    <h2 class="modalTitle">Galerie photo</h2>
+                    <div class="modalGallery"></div>
+                    <div class="modalButtons">
+                        <button class="addModalBtn">Ajouter une photo</button>
+                    </div>
                 </div>
-                <h2 id="modalTitle">Galerie photo</h2>
-                <div class="modalGallery"></div>
-                <div class="modalButtons">
-                    <button class="addModalBtn">Ajouter une photo</button>
+
+                <!---- Modal page for upload -->
+                <div id="modalUpload" class="hidden">
+                    <div class="xClose">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <a href="#"><i class="fa-solid fa-xmark icone"></i></a>
+                    </div>
+                    <div class="photoForm">
+                        <h2 class="modalTitle">Ajout photo</h2>
+                        <i class="fa-regular fa-image"></i>
+                        <button class="uploadPhoto">+ Ajouter phone</button>
+                        <p>jpg, png: 4mo max</p>
+                    </div>
+                    <div class="modalForm">
+                        <form action="#" method="post">
+                            <label for="title">Titre</label>
+                            <input type="text" name="title" id="title" />
+                            <label for="category">Catégorie</label>
+                            <input type="text" name="category" id="category" />
+                            <input type="submit" value="Envoyer" />
+                        </form>
+                    </div>
                 </div>
             </div>
         </aside>

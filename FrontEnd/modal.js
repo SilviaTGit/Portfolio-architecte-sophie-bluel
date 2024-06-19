@@ -11,7 +11,7 @@ const openModal = function(e) {
     target.setAttribute("aria-modal","true");
     modal = target;
     modal.addEventListener("click", closeModal);
-    modal.querySelector(".xClose").addEventListener("click", closeModal);
+    modal.querySelector(".xClose a").addEventListener("click", closeModal);
     /*const close = document.querySelector(".xClose");
     close.addEventListener("click", closeModal);*/
     modal.querySelector(".modalStop").addEventListener("click", stopPropagation);
@@ -27,7 +27,7 @@ const closeModal = function(e) {
     modal.setAttribute("aria-hidden", "true");
     modal.removeAttribute("aria-modal");
     modal.removeEventListener("click", closeModal);
-    modal.querySelector(".xClose").removeEventListener("click", closeModal)
+    modal.querySelector(".xClose a").removeEventListener("click", closeModal)
     modal.querySelector(".modalStop").removeEventListener("click", stopPropagation)
     modal = null;
 };
@@ -80,6 +80,11 @@ function deleteWorks() {
     // Iterate over each trash icon and add a click event listener
     trashAll.forEach(trash => {
         trash.addEventListener("click", async (e) => {
+        // Prevent the default action of the click event
+        e.preventDefault();
+        // Stop the event from propagating upwards (prevents modal closure)
+        e.stopPropagation();
+
             // Get the ID of the work to delete from the trash icon's ID
             const id = trash.id;
             // Retrieve the token from localStorage
@@ -106,10 +111,45 @@ function deleteWorks() {
                 // Parse the response data as JSON
                 const data = await response.json();
                 console.log("Delete worked, here the data:", data);
-                displayModalGallery(); // Refresh the Modal gallery to reflect the deletion
+                // Remove the parent figure element of the clicked trash icon
+                const figure = trash.closest("figure");
+                if (figure) {
+                    figure.remove();
+                }
+
             } catch (error) {
                 console.error("Error deleting work:", error); // Log any errors that occur during the fetch request
             }
         });
     });
 }
+
+
+/* Function to handle navigation between modal1 and modalUpload */
+
+document.addEventListener("DOMContentLoaded", function() {
+    const modal1 = document.querySelector(".modal1");
+    const modalUpload = document.getElementById("modalUpload");
+    const addModalBtn = document.querySelector(".addModalBtn");
+    const backBtn = document.querySelector(".fa-arrow-left");
+
+    addModalBtn.addEventListener("click", function() {
+        modal1.classList.add("hidden"); // Hide the first part of modal
+        modalUpload.classList.remove("hidden"); // Show the upload part of the modal
+    });
+
+    const backToModal1 = function() {
+        modalUpload.classList.add("hidden"); // Hide the upload part of the modal
+        modal1.classList.remove("hidden"); // Show the first part of the modal
+    };
+
+    backBtn.addEventListener("click", backToModal1);
+
+    const closeModalAndBackToModal1 = function(e) {
+        backToModal1();
+        closeModal(e);
+    };
+
+    // Event listener to close modal when clicking on xClose to modal
+    modalUpload.querySelector(".xClose a").addEventListener("click", closeModalAndBackToModal1);
+});
