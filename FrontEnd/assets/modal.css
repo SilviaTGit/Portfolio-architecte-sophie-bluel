@@ -75,14 +75,64 @@
     color: #ffffff;
 }
 
-.addModalBtn {
+.addModalBtn,
+.uploadPhotoBtn {
     font-family: "Syne";
-    color: white;
-    background-color: #1d6154;
-    border: 1px solid #1d6154;
     width: 180px;
     border-radius: 60px;
     padding: 0.5em 0.3em 0.5em 0.3em;
-    margin-bottom: 1em;
     cursor: pointer;
+}
+
+.addModalBtn {
+    color: white;
+    background-color: #1d6154;
+    border: 1px solid #1d6154;
+    margin-bottom: 1em;
+}
+
+.uploadPhotoBtn {
+    color: #306685;
+    background-color: #b9c5cc;
+    border: 1px solid #b9c5cc;
+}
+
+.modalForm {
+    box-sizing: border-box;
+    margin: 0 3em;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.modalForm form {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+}
+
+.modalForm label {
+    margin: 2em 0 1em 0;
+}
+
+.modalForm input {
+    height: 30px;
+    font-size: 1.2em;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+}
+
+.photoForm {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #e8f1f6;
+    height: 169px;
+    border-radius: 5px;
+    gap: 0.6em;
+}
+
+.photoForm i {
+    color: #b9c5cc;
 }
