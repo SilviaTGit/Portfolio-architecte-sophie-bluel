@@ -153,3 +153,8 @@ document.addEventListener("DOMContentLoaded", function() {
     // Event listener to close modal when clicking on xClose to modal
     modalUpload.querySelector(".xClose a").addEventListener("click", closeModalAndBackToModal1);
 });
+
+
+const inputFile = document.getElementById("file");
+
+inputFile.style.opacity = 0;

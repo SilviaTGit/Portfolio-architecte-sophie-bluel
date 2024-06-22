@@ -115,7 +115,8 @@
     margin: 2em 0 1em 0;
 }
 
-.modalForm input {
+.modalForm input,
+.modalForm select {
     height: 30px;
     font-size: 1.2em;
     border: none;
@@ -135,4 +136,17 @@
 
 .photoForm i {
     color: #b9c5cc;
+}
+
+/* Gray line between select category and submit button */
+.modalSubmit {
+    display: flex;
+    border-top: 1px solid rgba(0, 0, 0, 0.3);
+    margin-top: 3em;
+}
+
+/* Submit button not clickable */
+.modalSubmit input[type="submit"]:disabled {
+    background-color: grey;
+    cursor: not-allowed;
 }
