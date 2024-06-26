@@ -155,6 +155,78 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 
-const inputFile = document.getElementById("file");
 
-inputFile.style.opacity = 0;
+/*document.addEventListener('DOMContentLoaded', (event) => {
+    var fileInput = document.getElementById('file');
+    var uploadBtn = document.querySelector(".uploadPhotoBtn");
+
+    if (uploadBtn) {
+        uploadBtn.addEventListener('click', function() {
+            fileInput.click();
+        });
+    } else {
+        console.error("uploadBtn element not found in DOM");
+    }
+});*/
+
+
+/* Image preview */
+
+const imgPreview = document.querySelector(".photoForm img");
+const inputFile = document.querySelector(".photoForm input");
+const labelFile = document.querySelector(".photoForm label");
+const iconFile = document.querySelector(".photoForm .fa-image");
+const pFile = document.querySelector(".photoForm p");
+
+inputFile.addEventListener("change", ()=>{
+    const file = inputFile.files[0]
+    console.log(file);
+    if (file) {
+        const reader = new FileReader();
+        reader.onload = function (e){
+            imgPreview.src = e.target.result
+            imgPreview.style.display= "flex";
+            labelFile.style.display = "none";
+            iconFile.style.display = "none";
+            pFile.style.display = "none";
+        }
+        reader.readAsDataURL(file);
+    }
+});
+
+
+ /* Function to get categories from the API */
+ async function getCategories() {
+    try {
+        const response = await fetch("http://localhost:5678/api/categories");
+        if (!response.ok) {
+            throw new Error("Error while retrieving categories");
+        }
+        const categories = await response.json();
+        populateCategoryDropdown(categories);
+    } catch (error) {
+        console.error("Error:", error);
+    }
+}
+
+/* Create a list of categories in the input select */
+function populateCategoryDropdown(categories) {
+    const categorySelect = document.getElementById("category");
+
+    // Add an empty default option
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.textContent = "";
+    categorySelect.appendChild(defaultOption);
+
+    categories.forEach(category => {
+        const option = document.createElement("option");
+        option.value = category.id;
+        option.textContent = category.name;
+        categorySelect.appendChild(option);
+    });
+}
+
+getCategories();
+
+/* Execute POST request to add a new work */

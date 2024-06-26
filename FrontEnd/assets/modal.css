@@ -95,6 +95,7 @@
     color: #306685;
     background-color: #b9c5cc;
     border: 1px solid #b9c5cc;
+    text-align: center;
 }
 
 .modalForm {
@@ -102,17 +103,15 @@
     margin: 0 3em;
     display: flex;
     flex-direction: column;
-    text-align: center;
-}
-
-.modalForm form {
     text-align: left;
-    display: flex;
-    flex-direction: column;
 }
 
 .modalForm label {
     margin: 2em 0 1em 0;
+}
+
+.photoForm label {
+    margin: 0;
 }
 
 .modalForm input,
@@ -127,11 +126,10 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     background-color: #e8f1f6;
     height: 169px;
     border-radius: 5px;
-    gap: 0.6em;
 }
 
 .photoForm i {
@@ -149,4 +147,20 @@
 .modalSubmit input[type="submit"]:disabled {
     background-color: grey;
     cursor: not-allowed;
+}
+
+/* Hide the standard input file */
+input[type="file"] {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    overflow: hidden;
+    position: absolute;
+    z-index: -1;
+}
+
+/* Style for the preview image */
+.photoForm img {
+    box-sizing: border-box;
+    height: 100%;
 }
