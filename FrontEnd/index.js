@@ -24,7 +24,7 @@ function addWorksToGallery(works) {
 }
 
 /* Function to display all works in the DOM */
-async function displayWorks() {
+export async function displayWorks() {
   const arrayWorks = await getWorks();
   addWorksToGallery(arrayWorks);  // Add the works to the gallery
 }

@@ -230,3 +230,49 @@ function populateCategoryDropdown(categories) {
 getCategories();
 
 /* Execute POST request to add a new work */
+
+import { displayWorks } from "./index.js"; //Import displayWorks function
+
+const form = document.querySelector(".modalForm");
+const title = document.querySelector(".modalForm #title");
+const category = document.querySelector(".modalForm #category");
+
+// Retrieve the token from localStorage
+const token = localStorage.getItem("token"); 
+
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    try {
+        const file = document.querySelector(".modalForm #file").files[0];
+        if (file && file.size > 4 * 1024 * 1024) { // Check if the file is larger than 4MB
+            alert("File size exceeds 4MB limit.");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("title", title.value);
+        formData.append("category", category.value);
+        formData.append("image", file);
+
+        const response = await fetch("http://localhost:5678/api/works", {
+            method: "POST",
+            body: formData,
+            headers: {
+                "Authorization": `Bearer ${token}` // Add the token of authentication
+            }
+        });
+
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(`Error: ${response.status} - ${errorText}`);
+        }
+
+        const data = await response.json();
+        displayWorks();
+        console.log("Work added:", data);
+    } catch (error) {
+        console.error("Error while adding the job:", error);
+    }
+});
