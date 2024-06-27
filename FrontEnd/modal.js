@@ -180,7 +180,6 @@ const pFile = document.querySelector(".photoForm p");
 
 inputFile.addEventListener("change", ()=>{
     const file = inputFile.files[0]
-    console.log(file);
     if (file) {
         const reader = new FileReader();
         reader.onload = function (e){
@@ -237,17 +236,16 @@ const form = document.querySelector(".modalForm");
 const title = document.querySelector(".modalForm #title");
 const category = document.querySelector(".modalForm #category");
 
-// Retrieve the token from localStorage
+// Get the token from localStorage
 const token = localStorage.getItem("token"); 
 
 form.addEventListener("submit", async (e) => {
     e.preventDefault();
-    e.stopPropagation();
 
     try {
         const file = document.querySelector(".modalForm #file").files[0];
         if (file && file.size > 4 * 1024 * 1024) { // Check if the file is larger than 4MB
-            alert("File size exceeds 4MB limit.");
+            alert("The file size exceeds the 4MB limit.");
             return;
         }
 
@@ -260,19 +258,22 @@ form.addEventListener("submit", async (e) => {
             method: "POST",
             body: formData,
             headers: {
-                "Authorization": `Bearer ${token}` // Add the token of authentication
+                "Authorization": `Bearer ${token}` // Add the authentication token
             }
         });
 
         if (!response.ok) {
-            const errorText = await response.text();
+            const errorText = await response.text(); // Read the response text
+            alert(`Error: ${response.status} - ${errorText}`);
             throw new Error(`Error: ${response.status} - ${errorText}`);
         }
 
         const data = await response.json();
-        displayWorks();
-        console.log("Work added:", data);
+        alert("Work added successfully!"); // Show success alert
+
+        await displayWorks();
     } catch (error) {
-        console.error("Error while adding the job:", error);
+        alert("Error adding work.");
+        console.error("Error adding work:", error);
     }
 });
