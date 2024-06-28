@@ -108,13 +108,12 @@ function deleteWorks() {
                     return;
                 }
 
-                // Parse the response data as JSON
-                const data = await response.json();
-                console.log("Delete worked, here the data:", data);
                 // Remove the parent figure element of the clicked trash icon
                 const figure = trash.closest("figure");
                 if (figure) {
                     figure.remove();
+                    alert("Work deleted successfully!"); // Show success alert
+                    console.log("Delete worked, element removed.");
                 }
 
             } catch (error) {
@@ -141,7 +140,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const backToModal1 = function() {
         modalUpload.classList.add("hidden"); // Hide the upload part of the modal
         modal1.classList.remove("hidden"); // Show the first part of the modal
-    };
+    }; 
 
     backBtn.addEventListener("click", backToModal1);
 
@@ -242,7 +241,7 @@ const submitButton = document.querySelector(".modalSubmit input[type='submit']")
 function checkFormValidity() {
     const file = inputFile.files[0]; // Get the first file selected by the user
     const isFileValid = file && file.size <= 4 * 1024 * 1024; // File is present and <= 4MB
-    const isTitleValid = title.value.trim() !== ""; // Title is not empty
+    const isTitleValid = title.value.trim() !== ""; // Check whether title after the removal of white spaces is not empty
     const isCategoryValid = category.value !== ""; // Category is selected
 
     if (isFileValid && isTitleValid && isCategoryValid) {
@@ -292,7 +291,13 @@ form.addEventListener("submit", async (e) => {
         const data = await response.json();
         alert("Work added successfully!"); // Show success alert
 
-        await displayWorks();
+        // Clear input fields
+        form.reset();
+        imgPreview.style.display = "none";
+        labelFile.style.display = "block";
+        iconFile.style.display = "block";
+        pFile.style.display = "block";
+        
     } catch (error) {
         alert("Error adding work.");
         console.error("Error adding work:", error);
