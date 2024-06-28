@@ -181,15 +181,15 @@ const pFile = document.querySelector(".photoForm p");
 inputFile.addEventListener("change", ()=>{
     const file = inputFile.files[0]
     if (file) {
-        const reader = new FileReader();
-        reader.onload = function (e){
-            imgPreview.src = e.target.result
+        const reader = new FileReader(); // Create a new filereader
+        reader.onload = function (e){ // Set the callback function onload
+            imgPreview.src = e.target.result // Set data URL as image src
             imgPreview.style.display= "flex";
             labelFile.style.display = "none";
             iconFile.style.display = "none";
             pFile.style.display = "none";
         }
-        reader.readAsDataURL(file);
+        reader.readAsDataURL(file); // Start reading the file
     }
 });
 
@@ -235,6 +235,27 @@ import { displayWorks } from "./index.js"; //Import displayWorks function
 const form = document.querySelector(".modalForm");
 const title = document.querySelector(".modalForm #title");
 const category = document.querySelector(".modalForm #category");
+const submitButton = document.querySelector(".modalSubmit input[type='submit']");
+
+
+// Function to check if the form is valid
+function checkFormValidity() {
+    const file = inputFile.files[0]; // Get the first file selected by the user
+    const isFileValid = file && file.size <= 4 * 1024 * 1024; // File is present and <= 4MB
+    const isTitleValid = title.value.trim() !== ""; // Title is not empty
+    const isCategoryValid = category.value !== ""; // Category is selected
+
+    if (isFileValid && isTitleValid && isCategoryValid) {
+        submitButton.disabled = false; // Enable the submit button
+    } else {
+        submitButton.disabled = true; // Keep the submit button disabled
+    }
+}
+
+// Add event listeners to check form validity on input changes
+inputFile.addEventListener("change", checkFormValidity);
+title.addEventListener("input", checkFormValidity);
+category.addEventListener("change", checkFormValidity);
 
 // Get the token from localStorage
 const token = localStorage.getItem("token"); 
@@ -243,7 +264,7 @@ form.addEventListener("submit", async (e) => {
     e.preventDefault();
 
     try {
-        const file = document.querySelector(".modalForm #file").files[0];
+        const file = document.querySelector(".modalForm #file").files[0]; // Get the first file selected by the user
         if (file && file.size > 4 * 1024 * 1024) { // Check if the file is larger than 4MB
             alert("The file size exceeds the 4MB limit.");
             return;
