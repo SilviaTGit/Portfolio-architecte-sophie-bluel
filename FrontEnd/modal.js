@@ -153,22 +153,6 @@ document.addEventListener("DOMContentLoaded", function() {
     modalUpload.querySelector(".xClose a").addEventListener("click", closeModalAndBackToModal1);
 });
 
-
-
-/*document.addEventListener('DOMContentLoaded', (event) => {
-    var fileInput = document.getElementById('file');
-    var uploadBtn = document.querySelector(".uploadPhotoBtn");
-
-    if (uploadBtn) {
-        uploadBtn.addEventListener('click', function() {
-            fileInput.click();
-        });
-    } else {
-        console.error("uploadBtn element not found in DOM");
-    }
-});*/
-
-
 /* Image preview */
 
 const imgPreview = document.querySelector(".photoForm img");
@@ -251,10 +235,20 @@ function checkFormValidity() {
     }
 }
 
+// Function to add "touched" class to elements
+function addTouchedClass(event) {
+    event.target.classList.add("touched");
+}
+
+// Add event listeners to add the "touched" class when inputs are touched
+title.addEventListener("blur", addTouchedClass);
+category.addEventListener("blur", addTouchedClass);
+
 // Add event listeners to check form validity on input changes
 inputFile.addEventListener("change", checkFormValidity);
 title.addEventListener("input", checkFormValidity);
 category.addEventListener("change", checkFormValidity);
+
 
 // Get the token from localStorage
 const token = localStorage.getItem("token"); 
@@ -297,6 +291,15 @@ form.addEventListener("submit", async (e) => {
         labelFile.style.display = "block";
         iconFile.style.display = "block";
         pFile.style.display = "block";
+
+        // Display the updated works
+        await displayWorks();
+        await displayModalGallery();
+
+        // Back to the first part of the modal
+        const backBtn = document.querySelector(".fa-arrow-left");
+        backBtn.click();
+
         
     } catch (error) {
         alert("Error adding work.");

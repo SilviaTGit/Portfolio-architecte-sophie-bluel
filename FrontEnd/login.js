@@ -35,7 +35,6 @@ async function authentification() {
         const data = await response.json(); // Convert the response data to JSON
         localStorage.setItem("token", data.token); // Save the authentication token in localStorage
         window.location.href = "index.html"; // Redirect the user to the main page
-        console.log(data);
 
     } catch (error) {
         console.log('There has been a problem with your fetch operation:', error); // Log any errors that occurred during the fetch operation

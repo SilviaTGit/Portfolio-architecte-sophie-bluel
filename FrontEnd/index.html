@@ -97,9 +97,9 @@
                         </div>
 
                         <label for="title">Titre</label>
-                        <input type="text" name="title" id="title" />
+                        <input type="text" name="title" id="title" required pattern="\S.*" /><!--- This input can't be empty -->
                         <label for="category">Catégorie</label>
-                        <select name="category" id="category"></select>
+                        <select name="category" id="category" required></select>
                         <div class="modalSubmit">
                             <input type="submit" value="Envoyer" disabled />
                         </div>
