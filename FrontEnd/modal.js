@@ -5,16 +5,24 @@ let modal = null;
 /* Function that open the Modal page */
 const openModal = function(e) {
     e.preventDefault();
-    const target = document.querySelector(e.target.getAttribute("href"));
+    const anchor = e.target.closest("a"); // Find the nearest <a> item
+    const href = anchor ? anchor.getAttribute("href") : null; 
+    const target = document.querySelector(href); // Find the element with the ID corresponding to the href attribute
+    if (target) {
     target.style.display = null;
     target.removeAttribute("aria-hidden");
     target.setAttribute("aria-modal","true");
     modal = target;
     modal.addEventListener("click", closeModal);
     modal.querySelector(".xClose a").addEventListener("click", closeModal);
-    /*const close = document.querySelector(".xClose");
-    close.addEventListener("click", closeModal);*/
+    const closeAnchor = modal.querySelector(".xClose a"); 
+    if (closeAnchor) {
+    closeAnchor.addEventListener("click", closeModal);
+}
     modal.querySelector(".modalStop").addEventListener("click", stopPropagation);
+} else {
+    console.error("Modal target not found");
+}
 
 };
 /* Function that close the Modal page */
@@ -27,7 +35,10 @@ const closeModal = function(e) {
     modal.setAttribute("aria-hidden", "true");
     modal.removeAttribute("aria-modal");
     modal.removeEventListener("click", closeModal);
-    modal.querySelector(".xClose a").removeEventListener("click", closeModal)
+    const closeAnchor = modal.querySelector(".xClose a");
+    if (closeAnchor) {
+        closeAnchor.removeEventListener("click", closeModal);
+    }
     modal.querySelector(".modalStop").removeEventListener("click", stopPropagation)
     modal = null;
 };
