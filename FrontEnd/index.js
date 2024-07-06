@@ -1,6 +1,7 @@
 /* Variables */
 const gallery = document.querySelector(".gallery");
 const filters = document.querySelector(".filters");
+let activeButton; // Variable to store the active button
 
 /* Function that returns the list of works */
 export async function getWorks() {
@@ -61,10 +62,26 @@ async function displayCategories() {
     button.textContent = category.name;
     button.id = category.id;  // Set the button id
     button.classList.add('filter-button');  // Add the 'filter-button' class to the button
-    button.addEventListener('click', () => filterWorksByCategory(category.name));  // Add a click event listener
-    filters.appendChild(button);  // Add the button to the filters
+    button.addEventListener('click', () => {
+      filterWorksByCategory(category.name);  // Add a click event listener
+      updateActiveButton(button);  // Update the active button
   });
+  filters.appendChild(button);  // Add the button to the filters
+  if (category.name === "Tous") {
+      button.classList.add('button-active');  // Set "Tous" button as active by default
+      activeButton = button;
+  }
+});
 }
+
+function updateActiveButton(newActiveButton) {
+if (activeButton) {
+  activeButton.classList.remove('button-active');  // Remove the active class from the previous active button
+}
+newActiveButton.classList.add('button-active');  // Add the active class to the new active button
+activeButton = newActiveButton;
+}
+
 
 displayCategories();  // Call the function to display the filter buttons
 displayWorks();  // Call the function to initially display all works
@@ -109,10 +126,4 @@ function displayEditMode() {
 
   editModeBanner.appendChild(icon);
   editModeBanner.appendChild(text);
-
-const projectsSection = document.querySelector("#portfolio h2");
-
-  /* Add icon and text directly after "Mes Projets" 
-  projectsSection.innerHTML += ' <a href="#openModal" class="openModal1"><i class="fa-regular fa-pen-to-square"></i> modifier</a>';
-  */
 };

@@ -318,7 +318,8 @@ footer nav ul {
     border-style: solid;
 }
 
-button:focus {
+/*** Styles for the active filter button ***/
+.button-active {
     background-color: #1d6154;
     color: white;
 }

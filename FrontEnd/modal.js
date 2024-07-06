@@ -125,6 +125,7 @@ function deleteWorks() {
                     figure.remove();
                     alert("Work deleted successfully!"); // Show success alert
                     console.log("Delete worked, element removed.");
+                    displayWorks(); // Display the updated works;
                 }
 
             } catch (error) {
