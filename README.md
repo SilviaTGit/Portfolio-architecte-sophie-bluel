@@ -1,8 +1,22 @@
 # Portfolio-architecte-sophie-bluel
+The project involves creating a portfolio website for an architect named Sophie Bluel.
 
-Code du projet 6 d'intégrateur web.
+## Project Description
 
-## Information pour le lancer le code
+The goal of this project is to develop a responsive and interactive portfolio website that showcases the work of Sophie Bluel. The website includes features such as a gallery of works, a modal for viewing details, and the ability to delete works from the gallery.
 
- - Lancer le backend depuis votre terminal en suivant les instruction du fichier ReadMe.
- - Si vous désirez afficher le code du backend et du frontend, faites le dans 2 instances de VSCode différentes pour éviter tout problème
+## Technologies Used
+
+- **HTML**: For structuring the content of the website.
+- **CSS**: For styling the website and making it responsive.
+- **JavaScript**: For adding interactivity and handling events.
+- **Fetch API**: For making asynchronous requests to the backend.
+- **LocalStorage**: For storing authentication tokens.
+
+## Information to run the code
+
+- Start the backend from your terminal by following the instructions in the [Backend/ReadMe.md](Backend/ReadMe.md) file.
+- If you want to display the backend and frontend code, do it in 2 different instances of VSCode to avoid any issues.
+
+https://github.com/user-attachments/assets/b0764e11-8db5-4a8f-85fc-53995efdbf01
+
